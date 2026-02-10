@@ -23,6 +23,12 @@ This is a Python-based command-line voice bot designed for basic KYC verificatio
    ```
    *Note: On Windows, if `pyaudio` fails to install, you may need to download the appropriate .whl file for your Python version from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio) or ensure you have the Microsoft Visual C++ Build Tools installed.*
 
+## Integration with Decentro
+This bot produces a JSON file that can be readily consumed by backend systems. To enhance this, you could integrate with **Decentro's Scanner APIs**:
+- **Face Match API**: Compare a captured selfie (if added) with the ID photo.
+- **OCR API**: Extract text from an uploaded ID image to auto-fill the details instead of asking the user.
+- **Background Checks**: Use the collected PAN and Phone to run real-time background checks using Decentro's KYC APIs.
+
 ## Usage
 
 ### 🎤 For Full Voice Interaction (Recommended)
