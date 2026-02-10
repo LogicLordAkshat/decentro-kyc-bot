@@ -1,0 +1,8 @@
+__pycache__/
+venv/
+.env
+*.pyc
+# Ignore generated session files
+kyc_session_*.json
+# But keep sample_output.json
+!sample_output.json
