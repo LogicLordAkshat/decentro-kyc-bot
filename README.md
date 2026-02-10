@@ -25,11 +25,22 @@ This is a Python-based command-line voice bot designed for basic KYC verificatio
 
 ## Usage
 
-1. Run the script:
-   ```bash
-   python kyc_bot.py
-   ```
-2. The bot will greet you and ask for your details. Speak clearly into your microphone when prompted.
+### 🎤 For Full Voice Interaction (Recommended)
+You need a Python version compatible with `PyAudio` (Python 3.10, 3.11, or 3.12).
+If you have multiple Python versions installed, run:
+```bash
+py -3.11 kyc_bot.py
+# OR
+python3.11 kyc_bot.py
+```
+
+### ⌨️ For Text-Only Mode (Fallback)
+If you are using Python 3.13 or newer (e.g., Python 3.14 Beta), voice features may not work due to library incompatibility. The bot will automatically switch to text mode.
+```bash
+python kyc_bot.py
+```
+
+1. The bot will greet you and ask for your details. Speak clearly into your microphone when prompted.
    - **Name**: Speak your full name.
    - **Phone**: Say your 10-digit phone number (e.g., "9 8 7 6 5 4 3 2 1 0").
    - **PAN**: Say your 10-character PAN (e.g., "A B C D E 1 2 3 4 F").
