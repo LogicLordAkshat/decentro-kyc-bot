@@ -7,6 +7,7 @@ This is a Python-based command-line voice bot designed for basic KYC verificatio
 - **Basic Validation**: Checks for non-empty names, 10-digit phone numbers, and 10-character alphanumeric PANs.
 - **Retry Logic**: Handles invalid inputs by re-prompting the user up to 2 times.
 - **JSON Logging**: Saves the session data to a local JSON file for backend integration.
+- **Fallback Mode**: Automatically switches to text input if microphone is unavailable (common on newer Python versions like 3.13+ where PyAudio wheels are missing).
 
 ## Requirements
 - Python 3.x

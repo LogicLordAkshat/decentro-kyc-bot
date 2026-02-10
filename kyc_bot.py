@@ -16,9 +16,8 @@ class KYCVoiceBot:
         self.engine = pyttsx3.init()
         self.engine.setProperty('rate', 170)  # Speed of speech
         
-        # Select voice (try to find a clear female/male voice, default to 0 usually Microsoft Zira/David)
+        # Select voice
         voices = self.engine.getProperty('voices')
-        # Prefer a female voice often clearer for bots, usually index 1 on Windows (Zira)
         if len(voices) > 1:
             self.engine.setProperty('voice', voices[1].id)
         else:
@@ -26,13 +25,18 @@ class KYCVoiceBot:
 
         # Initialize Recognizer
         self.recognizer = sr.Recognizer()
-        self.microphone = sr.Microphone()
+        self.use_speech = True
         
-        # Adjust for ambient noise
-        with self.microphone as source:
-            print(f"{Fore.CYAN}Calibrating microphone for ambient noise... Please wait.")
-            self.recognizer.adjust_for_ambient_noise(source, duration=1)
-            print(f"{Fore.GREEN}Ready!")
+        try:
+            self.microphone = sr.Microphone()
+            # Adjust for ambient noise
+            with self.microphone as source:
+                print(f"{Fore.CYAN}Calibrating microphone for ambient noise... Please wait.")
+                self.recognizer.adjust_for_ambient_noise(source, duration=1)
+                print(f"{Fore.GREEN}Ready!")
+        except (OSError, AttributeError):
+            print(f"{Fore.RED}Microphone not available (PyAudio might be missing). Switching to text input mode.")
+            self.use_speech = False
 
     def speak(self, text):
         """Convert text to speech."""
@@ -45,6 +49,10 @@ class KYCVoiceBot:
         if prompt:
             self.speak(prompt)
         
+        if not self.use_speech:
+            print(f"{Fore.CYAN}Enter your response:")
+            return input(f"{Fore.WHITE}User (Text): ").lower()
+
         with self.microphone as source:
             print(f"{Fore.CYAN}Listening...")
             try:
