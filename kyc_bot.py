@@ -10,18 +10,18 @@ from colorama import Fore, Style
 # Initialize colorama
 colorama.init(autoreset=True)
 
+import os
+from gtts import gTTS
+import playsound
+
 class KYCVoiceBot:
     def __init__(self):
-        # Initialize TTS engine
-        self.engine = pyttsx3.init()
-        self.engine.setProperty('rate', 170)  # Speed of speech
-        
-        # Select voice
-        voices = self.engine.getProperty('voices')
-        if len(voices) > 1:
-            self.engine.setProperty('voice', voices[1].id)
-        else:
-            self.engine.setProperty('voice', voices[0].id)
+        # Initialize pyttsx3 engine as primary
+        try:
+            self.engine = pyttsx3.init()
+            self.engine.setProperty('rate', 150)
+        except Exception:
+            self.engine = None
 
         # Initialize Recognizer
         self.recognizer = sr.Recognizer()
@@ -39,10 +39,34 @@ class KYCVoiceBot:
             self.use_speech = False
 
     def speak(self, text):
-        """Convert text to speech."""
+        """Convert text to speech using gTTS (primary) and pyttsx3 (fallback)."""
         print(f"{Fore.YELLOW}Bot: {text}")
-        self.engine.say(text)
-        self.engine.runAndWait()
+        
+        # Method 1: Try gTTS (More reliable on this setup)
+        try:
+            tts = gTTS(text=text, lang='en', slow=False)
+            # Use unique filename to avoid permission issues on Windows
+            filename = f"temp_{int(time.time())}_{id(text)}.mp3"
+            tts.save(filename)
+            playsound.playsound(filename)
+            try:
+                os.remove(filename) # Clean up
+            except PermissionError:
+                pass # Ignore if file is locked, Windows cleans temp eventually
+            return
+        except Exception as e:
+            # print(f"gTTS failed: {e}") # Debug only
+            pass
+
+        # Method 2: Fallback to pyttsx3
+        if self.engine:
+            try:
+                self.engine.say(text)
+                self.engine.runAndWait()
+            except Exception:
+                pass 
+        
+        time.sleep(0.5)
 
     def listen(self, prompt=None):
         """Listen to user input and return text."""
@@ -156,14 +180,15 @@ class KYCVoiceBot:
         session_data['pan'] = cleaned_pan.upper()
 
         # Summary
-        self.speak(f"Confirming details. Name: {session_data['name']}. Phone: {session_data['phone']}.")
+        self.speak(f"Confirming details. Name: {session_data['name']}. Phone: {session_data['phone']}. PAN: {session_data['pan']}.")
         
         # 4. Consent
         # Final explicit consent
+        # Using a longer phrase "Yes I consent" improves recognition accuracy over just "Yes"
         user_consent, _ = self.validate_input(
-            "Do you consent to verification? Please say yes or no.",
+            "Do you consent to verification? Please say 'Yes, I consent' or 'No'.",
             self.is_valid_consent,
-            "I need a clear yes or no"
+            "I need a clear confirmation. Please say 'Yes, I consent'."
         )
         
         if user_consent:
