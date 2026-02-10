@@ -69,7 +69,7 @@ An example of the generated `kyc_session_timestamp.json`:
 
 ```json
 {
-    "name": "Jane Doe",
+    "name": "Akshat Srivastava",
     "phone": "9876543210",
     "pan": "ABCDE1234F",
     "consent": true,
