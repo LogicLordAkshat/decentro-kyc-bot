@@ -59,7 +59,11 @@ As part of the submission, please record a quick 1-minute video demo using your 
    - Say "Yes, I consent".
 5. **Show Output**: Briefly zoom in on the terminal showing the "Session saved" message and the JSON output.
 
-> **Upload Link**: [Verify/Add your video link here if hosting online]
+
+https://github.com/user-attachments/assets/32b58b3b-28f5-4d16-83cc-147dda85d81f
+
+
+
 
 ---
 
