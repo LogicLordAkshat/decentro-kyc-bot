@@ -14,6 +14,24 @@ A Python-based voice bot designed for seamless KYC verification. This bot simula
 - **Session Logging**: Automatically saves verified details to a timestamped JSON file.
 
 ---
+## 📱 1-Minute Demo Recording
+
+As part of the submission, please record a quick 1-minute video demo using your phone:
+
+1. **Start Recording**: Open your phone camera.
+2. **Capture Screen**: Point it at your computer screen.
+3. **Run the Bot**: Type `python kyc_bot.py` and hit Enter.
+4. **Perform flow**:
+   - Speak your Name.
+   - Speak a valid Phone Number.
+   - Speak a valid PAN.
+   - Say "Yes, I consent".
+5. **Show Output**: Briefly zoom in on the terminal showing the "Session saved" message and the JSON output.
+
+
+https://github.com/user-attachments/assets/32b58b3b-28f5-4d16-83cc-147dda85d81f
+
+
 
 ## 🛠️ Setup & Run Instructions
 
@@ -44,23 +62,6 @@ python kyc_bot.py
 **Note**: If the bot switches to "Text input mode", ensure your microphone is connected and allowed in Windows Privacy settings.
 
 ---
-
-## 📱 1-Minute Demo Recording
-
-As part of the submission, please record a quick 1-minute video demo using your phone:
-
-1. **Start Recording**: Open your phone camera.
-2. **Capture Screen**: Point it at your computer screen.
-3. **Run the Bot**: Type `python kyc_bot.py` and hit Enter.
-4. **Perform flow**:
-   - Speak your Name.
-   - Speak a valid Phone Number.
-   - Speak a valid PAN.
-   - Say "Yes, I consent".
-5. **Show Output**: Briefly zoom in on the terminal showing the "Session saved" message and the JSON output.
-
-
-https://github.com/user-attachments/assets/32b58b3b-28f5-4d16-83cc-147dda85d81f
 
 
 
